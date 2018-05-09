@@ -28,6 +28,10 @@ app.get('/', (_, res) => {
   });
 });
 
+app.post('/filesize', (req, res) => {
+  res.send('hello');
+});
+
 app.listen(PORT, () =>
   console.log(
     `[${currentTime}] express is running at http://${currentIp}:${PORT}`
