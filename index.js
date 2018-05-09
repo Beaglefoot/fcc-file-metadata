@@ -7,11 +7,6 @@ const getCurrentIp = require('./helpers/getCurrentIp');
 const getCurrentTime = require('./helpers/getCurrentTime');
 const logger = require('./middlewares/logger');
 
-const {} =
-  process.env.NODE_ENV === 'production'
-    ? process.env
-    : JSON.parse(fs.readFileSync('./.env', 'utf8'));
-
 const PORT = process.argv[2] || 3000;
 const currentIp = getCurrentIp();
 const currentTime = getCurrentTime();
