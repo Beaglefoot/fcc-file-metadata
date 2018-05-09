@@ -35,8 +35,14 @@ app.get('/', (_, res) => {
   });
 });
 
-app.post('/filesize', upload.single('file'), (req, res) => {
-  res.json({ size: req.file.size });
+app.post('/filesize', (req, res) => {
+  upload.single('file')(req, res, err => {
+    if (err) {
+      res.status(500).json({ error: err.message });
+      return;
+    }
+    res.json({ size: req.file.size });
+  });
 });
 
 app.listen(PORT, () =>
