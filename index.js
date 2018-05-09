@@ -2,6 +2,7 @@
 
 const fs = require('fs');
 const express = require('express');
+const multer = require('multer');
 const getCurrentIp = require('./helpers/getCurrentIp');
 const getCurrentTime = require('./helpers/getCurrentTime');
 const logger = require('./middlewares/logger');
@@ -16,6 +17,12 @@ const currentIp = getCurrentIp();
 const currentTime = getCurrentTime();
 
 const app = express();
+const upload = multer({
+  storage: multer.memoryStorage(),
+  limits: {
+    fileSize: 104857600
+  }
+});
 
 app.set('view engine', 'ejs');
 app.use(logger);
@@ -28,8 +35,8 @@ app.get('/', (_, res) => {
   });
 });
 
-app.post('/filesize', (req, res) => {
-  res.send('hello');
+app.post('/filesize', upload.single('file'), (req, res) => {
+  res.json({ size: req.file.size });
 });
 
 app.listen(PORT, () =>
