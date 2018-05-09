@@ -15,7 +15,7 @@ const app = express();
 const upload = multer({
   storage: multer.memoryStorage(),
   limits: {
-    fileSize: 104857600
+    fileSize: 20971520
   }
 });
 
